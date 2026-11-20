@@ -1,0 +1,38 @@
+# --- Python virtual environments ---
+.venv/
+venv/
+env/
+
+# --- Python build & cache files ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+
+# --- Tool caches & reports ---
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+junit*.xml
+
+# --- Secrets: NEVER commit API keys ---
+.env
+.env.*
+!.env.example
+
+# --- Editors & OS ---
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# --- Project outputs (generated, not source) ---
+*.log
+*.mp4
+*.gif
+outputs/
+eval_results/
