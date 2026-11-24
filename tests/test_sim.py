@@ -134,3 +134,16 @@ def test_pick_and_place(sim):
     final = sim.get_state().objects[CUBE_NAME].position
     assert final.distance_to(goal) < 0.05  # landed within 5 cm of the goal
     assert sim.get_state().holding is None
+
+
+def test_held_cube_moves_with_gripper(sim):
+    cube_pos_1 = sim.get_state().objects[CUBE_NAME].position
+    assert sim.move_to(Vec3(x=cube_pos_1.x, y=cube_pos_1.y, z=0.15)).success
+    assert sim.move_to(Vec3(x=cube_pos_1.x, y=cube_pos_1.y, z=CUBE_HALF_SIZE)).success
+    assert sim.grasp()
+    # print(sim.get_state().model_dump_json(indent=2))
+    print("grasp is ", sim.grasp())
+
+    assert sim.move_to(Vec3(x=cube_pos_1.x + 0.12, y=cube_pos_1.y - 0.15, z=0.15)).success
+    assert sim.get_state().holding == "red_cube"
+    assert cube_pos_1 != pytest.approx(sim.get_state().objects[CUBE_NAME].position, abs=0.01)
