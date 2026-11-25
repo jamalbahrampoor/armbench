@@ -6,6 +6,7 @@ teardown runs even if the test fails, so the physics server is never leaked.
 """
 
 import pytest
+from stub_sim import StubSim
 
 from armbench.sim import ArmSim
 
@@ -21,3 +22,8 @@ def sim():
     with ArmSim(gui=False) as s:
         s.reset(seed=0)
         yield s
+
+
+@pytest.fixture
+def stub():
+    return StubSim()
